@@ -26,7 +26,6 @@ def get_mapping(alpha_deg, beta_deg, wl_um, tilt_deg):
     
     # 2. Specular Reflection (Blaze Center)
     t_rad = np.deg2rad(tilt_deg)
-    # Mirror normal vector based on tilt
     norm = np.array([np.sin(t_rad)/np.sqrt(2), np.sin(t_rad)/np.sqrt(2), np.cos(t_rad)])
     kout_spec = kin - 2 * np.dot(kin, norm) * norm
     spec_tx = np.degrees(np.arctan2(kout_spec[0], kout_spec[2]))
@@ -47,42 +46,31 @@ def get_mapping(alpha_deg, beta_deg, wl_um, tilt_deg):
     return tx_list, ty_list, spec_tx, spec_ty
 
 # =====================================================
-# STREAMLIT UI - LAYOUT
+# STREAMLIT UI - SIDEBAR CONTROLS
 # =====================================================
-st.title("2D Order Mapping Simulator")
+st.sidebar.header("Simulation Parameters")
 
-# Reserve space for the plot at the top
-plot_spot = st.empty()
-
-st.write("---")
-st.subheader("Parameters")
-
-# Columns for sliders at the bottom
-c1, c2 = st.columns(2)
-
-with c1:
-    s_tilt = st.slider('Mirror Tilt (deg)', -12.0, 12.0, 0.0, 0.1)
-    s_alpha = st.slider('Alpha (Incident θ)', 0.0, 80.0, 45.0, 1.0)
-
-with c2:
-    s_beta = st.slider('Beta (Azimuth φ)', 0.0, 360.0, 45.0, 1.0)
-    s_wl = st.slider('Wavelength (μm)', 0.3, 1.0, 0.905, 0.005)
+s_tilt = st.sidebar.slider('Mirror Tilt (deg)', -12.0, 12.0, 0.0, 0.1)
+s_alpha = st.sidebar.slider('Alpha (Incident θ)', 0.0, 80.0, 45.0, 1.0)
+s_beta = st.sidebar.slider('Beta (Azimuth φ)', 0.0, 360.0, 45.0, 1.0)
+s_wl = st.sidebar.slider('Wavelength (μm)', 0.3, 1.0, 0.905, 0.005)
 
 # =====================================================
-# GENERATE PLOT
+# GENERATE PLOT IN MAIN AREA
 # =====================================================
+st.title("2D Order Mapping")
+
 tx_l, ty_l, stx, sty = get_mapping(s_alpha, s_beta, s_wl, s_tilt)
 
-fig, ax = plt.subplots(figsize=(8, 7))
-ax.scatter(tx_l, ty_l, s=15, color='red', alpha=0.5, label='Diffraction Orders (m,n)')
-ax.plot(stx, sty, 'bo', alpha=0.6, markersize=8, label='Blaze Center (Specular)')
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.scatter(tx_l, ty_l, s=20, color='red', alpha=0.5, label='Diffraction Orders (m,n)')
+ax.plot(stx, sty, 'bo', alpha=0.7, markersize=10, label='Blaze Center (Specular)')
 
 ax.set_xlabel('$θ_x$ (deg)')
 ax.set_ylabel('$θ_y$ (deg)')
-ax.set_xlim(-60, 60)
-ax.set_ylim(-60, 60)
-ax.grid(True, alpha=0.3)
+ax.set_xlim(-70, 70)
+ax.set_ylim(-70, 70)
+ax.grid(True, linestyle='--', alpha=0.5)
 ax.legend(loc='upper right')
 
-# Send plot to the reserved spot at the top
-plot_spot.pyplot(fig)
+st.pyplot(fig)
