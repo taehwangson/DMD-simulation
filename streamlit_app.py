@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Set page config for a cleaner look in Notion
-st.set_page_config(page_title="Mirror Simulation", layout="wide")
+st.set_page_config(page_title="DMD Diffraction Simulation", layout="wide")
 
 # =====================================================
 # CONSTANTS & CORE FUNCTIONS
@@ -48,11 +48,11 @@ def get_geometry(alpha_deg, beta_deg, L_val, lam):
 # =====================================================
 st.sidebar.header("Simulation Controls")
 
-tilt_val = st.sidebar.slider('Mirror Tilt (deg)', -12.0, 12.0, 0.0, 0.5)
-alpha_val = st.sidebar.slider('Alpha (Incident Angle)', 0, 80, 45)
-beta_val = st.sidebar.slider('Beta (Azimuth)', 0, 360, 45)
-L_val = st.sidebar.slider('Distance L (m)', 0.005, 0.1, 0.02, 0.005)
-wl_um = st.sidebar.slider('Wavelength (μm)', 0.3, 1.0, 0.905, 0.005)
+tilt_val = st.sidebar('Mirror Tilt (deg)', -12.0, 12.0, 0.0, 0.5)
+alpha_val = st.sidebar('Alpha (Incident Angle)', 0, 80, 45)
+beta_val = st.sidebar('Beta (Azimuth)', 0, 360, 45)
+L_val = st.sidebar('Distance L (m)', 0.005, 0.1, 0.02, 0.005)
+wl_um = st.sidebar('Wavelength (μm)', 0.3, 1.0, 0.905, 0.005)
 
 # =====================================================
 # CALCULATION LOGIC
@@ -94,7 +94,7 @@ Y_proj = (rx*yh[0] + ry*yh[1] + rz*yh[2]) * 1000 # to mm
 # =====================================================
 # PLOTTING
 # =====================================================
-st.title("Interactive Mirror Diffraction Simulation")
+st.title("Interactive DMD Diffraction Simulation")
 
 fig, axp = plt.subplots(figsize=(8, 6))
 im = axp.imshow(I, extent=[X_proj.min(), X_proj.max(), Y_proj.min(), Y_proj.max()], 
