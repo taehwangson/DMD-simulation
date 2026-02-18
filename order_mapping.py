@@ -62,7 +62,7 @@ st.title("2D Order Mapping")
 
 tx_l, ty_l, stx, sty = get_mapping(s_alpha, s_beta, s_wl, s_tilt)
 
-fig, ax = plt.subplots(figsize=(5, 5))
+fig, ax = plt.subplots(figsize=(8, 8))
 ax.scatter(tx_l, ty_l, s=20, color='red', alpha=0.5, label='Diffraction Orders (m,n)')
 ax.plot(stx, sty, 'bo', alpha=0.7, markersize=10, label='Blaze Center (Specular)')
 
