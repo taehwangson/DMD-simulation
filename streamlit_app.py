@@ -48,11 +48,11 @@ def get_geometry(alpha_deg, beta_deg, L_val, lam):
 # =====================================================
 st.sidebar.header("Simulation Controls")
 
-tilt_val = st.sidebar('Mirror Tilt (deg)', -12.0, 12.0, 0.0, 0.5)
-alpha_val = st.sidebar('Alpha (Incident Angle)', 0, 80, 45)
-beta_val = st.sidebar('Beta (Azimuth)', 0, 360, 45)
-L_val = st.sidebar('Distance L (m)', 0.005, 0.1, 0.02, 0.005)
-wl_um = st.sidebar('Wavelength (μm)', 0.3, 1.0, 0.905, 0.005)
+tilt_val = st.slider('Mirror Tilt (deg)', -12.0, 12.0, 0.0, 0.5)
+alpha_val = st.slider('Alpha (Incident Angle)', 0, 80, 45)
+beta_val = st.slider('Beta (Azimuth)', 0, 360, 45)
+L_val = st.slider('Distance L (m)', 0.005, 0.1, 0.02, 0.005)
+wl_um = st.slider('Wavelength (μm)', 0.3, 1.0, 0.905, 0.005)
 
 # =====================================================
 # CALCULATION LOGIC
