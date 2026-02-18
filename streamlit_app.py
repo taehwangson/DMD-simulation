@@ -12,7 +12,7 @@ px = py = 13.68e-6
 ax_dim = px * 0.96
 ay_dim = py * 0.96
 M_count = N_count = 10
-Ngrid = 300 # Reduced slightly for snappier web performance
+Ngrid = 400 # Reduced slightly for snappier web performance
 θmax = np.deg2rad(30)
 
 def sinc(u):
