@@ -73,4 +73,5 @@ ax.set_ylim(-70, 70)
 ax.grid(True, linestyle='--', alpha=0.5)
 ax.legend(loc='upper right')
 
-st.pyplot(fig)
+# st.pyplot(fig)
+st.pyplot(fig, use_container_width=False)
